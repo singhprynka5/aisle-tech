@@ -19,7 +19,7 @@ export const getLoginOtp = (code, mobile) => {
     } catch (err) {
       dispatch(
         fetchStatus(
-          (err && err.data && err.data.message) ||
+          (err && err.message) ||
           "Something went wrong. Please try again later.",
           GET_OTP_FAILED
         )
@@ -37,12 +37,12 @@ export const verifyOtp = (otp , mobileNumber) => {
         window.location.href="/profile"
         dispatch(fetchStatus(response.data, VERIFY_OTP_SUCCESS));
       } else {
-        throw new Error("Please Enter valid otp")
+        throw new Error("Invalid otp")
       }
     } catch (err) {
       dispatch(
         fetchStatus(
-          (err && err.data && err.data.message) ||
+          (err && err.message) ||
           "Something went wrong. Please try again later.",
           VERIFY_OTP_FAILED
         )

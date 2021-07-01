@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ErrorField from "./ErrorField";
+import { fetchStatus } from "../store/actions";
 
 import { Form, Col } from 'react-bootstrap';
 import { verifyOtp } from "../store/actions";
@@ -8,8 +9,8 @@ import { verifyOtp } from "../store/actions";
 
 function OtpForm(props) {
     const [seconds, setSeconds] = useState(59);
-    const [otpError, setError] = useState("");
     const [otp, setOtp] = useState("");
+    const otpStatus = useSelector(state => state.otpStatus);
 
     const dispatch = useDispatch();
 
@@ -19,12 +20,12 @@ function OtpForm(props) {
         } else {
             setSeconds(false);
         }
-    },[seconds]);
+    }, [seconds]);
 
     const handleOtpChange = (el) => {
         let otp = el.target.value;
-        setError("")
-        if(!otp || Number(otp)) {
+        dispatch(fetchStatus(null, "CLEAR_OTP_ERROR"));
+        if (!otp || Number(otp)) {
             setOtp(otp)
         }
     }
@@ -37,30 +38,29 @@ function OtpForm(props) {
     };
 
     const validateOtp = () => {
-        if(otp == 1234) {
-            setError("")
+        if (otp) {
             dispatch(verifyOtp(otp, props.mobile));
-        } else {
-            setError("Enter Valid Otp")
         }
     }
 
     return (
         <>
             <Form.Label>{props.mobile}</Form.Label>
+            <i className="fa fa-pencil" onClick={() => dispatch(fetchStatus(1, "CHANGE_LOGIN_STEP"))}></i>
             <h1>Enter The</h1>
             <h1>OTP</h1>
+
             <Form.Row>
                 <Form.Group as={Col} sm="4" controlId="formGridZip">
                     <Form.Control maxLength="4" value={otp} onKeyUp={(el) => handleKeyUp(el)} onChange={(el) => handleOtpChange(el)} />
                 </Form.Group>
             </Form.Row>
-            {otpError? <ErrorField error={otpError} />: null}
+            {otpStatus && otpStatus.otpError ? <ErrorField error={otpStatus.otpError} /> : null}
             <button variant="primary"
-                onClick={()=>validateOtp()}
+                onClick={() => validateOtp()}
                 type="submit" className="subButton btn">
-            Continue
-        </button> { seconds ? `00.${seconds}` : <span className="resend">Resend</span> }
+                Continue
+            </button> {seconds ? `00.${seconds}` : <span className="resend">Resend</span>}
         </>
     );
 }

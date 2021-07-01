@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import profileList from "./profileList";
 import otpStatus from "./otpStatus";
+import profileList from "./profileList";
 
 export default combineReducers({
+  otpStatus,
   profileList,
-  otpStatus
 });

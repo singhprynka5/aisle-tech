@@ -1,8 +1,11 @@
 import React from 'react';
 import { Form, Col } from 'react-bootstrap';
 import ErrorField from "./ErrorField";
+import { useSelector } from "react-redux";
 
 function LoginForm(props) {
+  const otpStatus = useSelector(state => state.otpStatus);
+
     return (
         <>
             <Form.Label>Get OTP</Form.Label>
@@ -18,7 +21,7 @@ function LoginForm(props) {
                         value={props.mobile} />
                 </Form.Group>
             </Form.Row>
-            {props.error ? <ErrorField error={props.error} /> : null}
+            {otpStatus && otpStatus.mobileError ? <ErrorField error={otpStatus.mobileError} /> : null}
             <button variant="primary"
                 onClick={() => props.validateMobile()}
                 type="submit" className="subButton btn">
