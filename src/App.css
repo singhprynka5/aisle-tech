@@ -1,38 +1,94 @@
-.App {
+body {
+  background-color: #f5f5f0;
+}
+
+.app {
+  background-color: #fff;
+  padding: 40px;
+  width: 400px;
+  height: 600px;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alignCenter {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.profileLikes {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.subButton {
+  color: #111;
+  background-color: #ffd633;
+  border-color: #ffd633 !important;
+  border-radius: 40%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.code {
+  width: 70px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: block;
+}
+
+.modal-main {
+  position:fixed;
+  background: white;
+  width: 80%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.modal-dialog{
+  overflow-y: initial !important
+}
+.modal-body{
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+input {
+  margin-top: 5px;
+  width: 400px;
+}
+
+#input {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  background-color: white;
+  background-color: -moz-field;
+  border: 1px solid grey;
+  box-shadow: 1px 1px 1px 0 lightgray inset;  
+  font: -moz-field;
+  font: -webkit-small-control;
+  margin-top: 5px;
+  padding: 2px 3px;
+  width: 398px;    
+}
+
+.resend {
+  color: blue;
+  cursor: pointer;
+}
+
+.tabBadge {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.iconImg{
+  display: block;
 }
